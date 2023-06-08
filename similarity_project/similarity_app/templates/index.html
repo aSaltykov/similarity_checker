@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Similarity Checker</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-control {
+            border-radius: 20px;
+            border: 2px solid #007BFF;
+            min-height: 150px;
+        }
+        .form-control:focus {
+            border-color: #0056b3;
+            box-shadow: none;
+        }
+        .btn-primary {
+            border-radius: 20px;
+            width: 25%;
+            margin: 0 auto;
+            display: block;
+        }
+        .label-text {
+            color: #007BFF;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'index' %}">Similarity Checker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mytexts' %}">My Texts</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container py-5 mt-5">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="text1" class="h4 text-primary">First text:</label>
+                <textarea class="form-control" id="text1" name="text1" placeholder="Enter first text" required>{{ text1 }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="text2" class="h4 text-primary">Second text:</label>
+                <textarea class="form-control" id="text2" name="text2" placeholder="Enter second text" required>{{ text2 }}</textarea>
+            </div>
+            <input type="submit" class="btn btn-primary mt-5" value="Check">
+        </form>
+        {% if result %}
+            <div class="alert alert-info mt-5" role="alert">
+                {{ result }}
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

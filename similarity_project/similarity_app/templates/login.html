@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+  <div class="border border-primary border-custom rounded p-4" style="width: 500px;">
+    <h2 class="text-primary mb-4 text-center">Sign In</h2>
+    <form method="POST">
+    {% csrf_token %}
+      <div class="form-group mt-4">
+        <input id="username" type="text" class="form-control rounded-pill form-control-small" name="username" placeholder="Enter your username" required/>
+      </div>
+      <div class="form-group mt-4">
+        <input id="password" type="password" class="form-control rounded-pill form-control-small" name="password" placeholder="Enter your password" required/>
+      </div>
+      <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary rounded-pill">Sign In</button>
+      </div>
+      {% if error %}
+      <div class="alert alert-danger mt-4 rounded-pill text-center" role="alert">
+        {{ error }}
+      </div>
+      {% endif %}
+    </form>
+  </div>
+</div>
+{% endblock %}

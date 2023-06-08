@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>My Texts</h2>
+  {% if texts %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Text 1</th>
+          <th scope="col">Text 2</th>
+          <th scope="col">Similarity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for text in texts %}
+        <tr>
+          <td>{{ text.text1 }}</td>
+          <td>{{ text.text2 }}</td>
+          <td>{{ text.result }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You haven't checked any texts yet.</p>
+  {% endif %}
+{% endblock %}
